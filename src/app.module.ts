@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TelegrafModule } from 'nestjs-telegraf';
 // import { botUpdate } from './bot/bot.update';
 import { BotController } from './bot/bot.controller';
+import { WebhookModule } from './webhook/webhook.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { BotController } from './bot/bot.controller';
       token: process.env.BOT_API as any,
     }),
     BotModule,
+    WebhookModule,
   ],
   controllers: [BotController],
   providers: [],
