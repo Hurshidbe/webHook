@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Req,
 } from '@nestjs/common';
 import { WebhookService } from './webhook.service';
 import { BotService } from 'src/bot/bot.service';
@@ -18,11 +19,11 @@ export class WebhookController {
   ) {}
 
   @Post('github')
-  async create(@Body() data: string) {
+  async create(@Body() data: any, @Req() req: any) {
     // const userId = parseInt(process.env.USER_ID!);
     // await this.botservice.notifyAdmin(userId, 'webhookdan messsage');
     try {
-      console.log(data);
+      console.log({ data, req });
       return data;
     } catch (error) {
       console.log(error.message);
