@@ -7,6 +7,7 @@ import { BotController } from './bot/bot.controller';
 import { WebhookModule } from './webhook/webhook.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import * as dotenv from 'dotenv';
+import { LoggerService } from './services/logger.service';
 dotenv.config();
 
 @Module({
@@ -21,6 +22,6 @@ dotenv.config();
     WebhookModule,
   ],
   controllers: [BotController],
-  providers: [],
+  providers: [LoggerService],
 })
 export class AppModule {}
