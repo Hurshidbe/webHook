@@ -22,7 +22,7 @@ export class WebhookController {
     const userId = parseInt(process.env.USER_ID!);
     try {
       const repoName = data.repository.name;
-      const firstCommit = data.commits[0]; //belgilab olish
+      const firstCommit = data.commits[0]; //commits arrayni belgilab olish
       const CommitterName = firstCommit.committer.name;
       const committerEmail = firstCommit.committer.email;
       const CommitMessage = firstCommit.message;
@@ -32,13 +32,12 @@ export class WebhookController {
       const modifiedFiles = firstCommit.modified;
       const commitedTime = firstCommit.timestamp;
 
-      const message = ` 📦 Repository: ${repoName}\n👤 Committer name: ${CommitterName}\n📧 Committer email: ${committerEmail}\n💬 Commit text: ${CommitMessage}\n🆔 Commit ID: ${CommitId}\n🕒 Time: ${commitedTime}\n➕ Added: ${addedFiles.join('\n') || '❌ Yoq'}\n➖ Removed:${removedFiles.join('\n') || '❌ Yoq'}\n🛠 Modified:${modifiedFiles.join('\n') || '❌ '}`;
-      console.log({ data, req });
       await this.botservice.notifyAdmin(
         userId,
         `📦 Repository: ${repoName}\n👤 Committer name: ${CommitterName}\n📧 Committer email: ${committerEmail}\n💬 Commit text: ${CommitMessage}\n🆔 Commit ID: ${CommitId}\n🕒 Time: ${commitedTime}\n➕ Added: \n${addedFiles.join(',\n') || '❌ Yo`q'}\n➖ Removed:\n${removedFiles.join(',\n') || '❌ Yo`q'}\n🛠 Modified: \n${modifiedFiles.join(',\n') || '❌ yo`q '}`,
       );
-      return message;
+      console.log(typeof CommitterName, typeof CommitId, typeof CommitMessage);
+      return await this.webhookService.notifySaver(data);
     } catch (error) {
       console.log(error.message);
     }
