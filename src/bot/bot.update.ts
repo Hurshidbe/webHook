@@ -7,8 +7,7 @@ export class botUpdate {
 
   @Start()
   clickStart(@Ctx() ctx: Context) {
-    console.log(ctx.from);
-    ctx.reply('Assalomu alaykum. mening WebHook botimga hush kelibsiz');
+    ctx.reply('Salom Hurshid 👋.\ngithub_actions botingiz ishlayapti ✅. \nIshlaringizga omad.');
   }
 }
 
