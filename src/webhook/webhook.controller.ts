@@ -24,7 +24,6 @@ export class WebhookController {
   @Post('github')
   async create(@Body() data: any, @Req() req: any) {
     const userId = parseInt(process.env.USER_ID!);
-    console.log(data)
     try {
       const repoName = data.repository.name;
       const firstCommit = data.commits[0]; //commits arrayni belgilab olish
